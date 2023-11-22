@@ -15,3 +15,5 @@ struct GiuliettaInventoryManagementApp: App {
         }
     }
 }
+
+//test
