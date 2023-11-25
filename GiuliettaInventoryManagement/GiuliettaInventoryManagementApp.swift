@@ -9,11 +9,15 @@ import SwiftUI
 
 @main
 struct GiuliettaInventoryManagementApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+    var navigationViewModel = NavigationViewModel()
+       var inventoryItemViewModel = InventoryItemViewModel()
 
-
+       var body: some Scene {
+           WindowGroup {
+               ContentView()
+                   // Inject your view models into the environment
+                   .environmentObject(navigationViewModel)
+                   .environmentObject(inventoryItemViewModel)
+           }
+       }
+   }

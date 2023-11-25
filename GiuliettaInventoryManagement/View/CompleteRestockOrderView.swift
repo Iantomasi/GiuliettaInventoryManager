@@ -11,6 +11,10 @@ struct CompleteRestockOrderView: View {
     @State private var comments: String = ""
     @State private var email: String = ""
     @State private var isDropdownVisible: Bool = false
+    
+    
+    @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel
+    @EnvironmentObject var orderViewModel: OrderViewModel
 
 
     //these will be hard-coded emails of the restaurant owners
@@ -40,19 +44,19 @@ struct CompleteRestockOrderView: View {
                 .padding(.top)
             
             //these will be the items that we clicked + button on in the past view
-            ForEach(0..<5) { _ in
-                HStack {
-                    Text("item")
-                        .padding(.trailing, 8)
-                    Spacer()
-                    Button(action: {
-                        //remove item logic
-                    }) {
-                        Image(systemName: "minus.circle.fill")
-                            .foregroundColor(.red)
-                    }
-                }
-            }
+            ForEach(inventoryItemViewModel.selectedItems) { item in
+                   HStack {
+                       Text(item.name)
+                           .padding(.trailing, 8)
+                       Spacer()
+                       Button(action: {
+                           inventoryItemViewModel.removeItemFromOrder(item: item)
+                       }) {
+                           Image(systemName: "minus.circle.fill")
+                               .foregroundColor(.red)
+                       }
+                   }
+               }
             
             //Simple additional comments field
             TextField("Comments", text: $comments)

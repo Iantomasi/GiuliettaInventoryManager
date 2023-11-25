@@ -8,9 +8,7 @@
 import Foundation
 class InventoryItemViewModel: ObservableObject {
 
-    @Published var items: [InventoryItemModel] = [
-     // here I will hard code my restaurant's items
-    ]
+    @Published var selectedItems: [InventoryItemModel] = []
 
     // Get item by id
     func getItem(by id: Int){

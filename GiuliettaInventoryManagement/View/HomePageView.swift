@@ -15,6 +15,8 @@ struct HomePageView: View {
     @State private var isBarExpanded: Bool = false
     @State private var isKitchenExpanded: Bool = false
     @EnvironmentObject var navigationViewModel: NavigationViewModel
+    @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel // Assume you have this ViewModel in your Environment
+
     
     
     
@@ -148,7 +150,7 @@ struct InventoryItemView: View {
                 .foregroundColor(.white) // Make the text white
             Spacer()
             Button(action: {
-                // Action to add the item to the order
+                inventoryItemViewModel.addItemToOrder(item: item)
             }) {
                 Image(systemName: "plus.circle.fill")
                     .foregroundColor(.white)
@@ -164,9 +166,9 @@ struct InventoryItemView: View {
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
             HomePageView(showArchiveListView: .constant(false))
                 .environmentObject(NavigationViewModel())
+                .environmentObject(InventoryItemViewModel())
         }
     }
-}
+
