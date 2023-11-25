@@ -39,6 +39,17 @@
 		143C975E2B0EB3F5003AAEB5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 143C975D2B0EB3F5003AAEB5 /* FirebaseStorage */; };
 		143C97602B0EB3F5003AAEB5 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 143C975F2B0EB3F5003AAEB5 /* FirebaseStorageCombine-Community */; };
 		143C97622B0EB5A5003AAEB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143C97612B0EB5A5003AAEB5 /* GoogleService-Info.plist */; };
+		14A639BF2B12831700E12415 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639BE2B12831700E12415 /* OrderModel.swift */; };
+		14A639C12B12833000E12415 /* InventoryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639C02B12833000E12415 /* InventoryItemModel.swift */; };
+		14A639C32B12835F00E12415 /* NavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639C22B12835F00E12415 /* NavigationViewModel.swift */; };
+		14A639C52B12839000E12415 /* InventoryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639C42B12839000E12415 /* InventoryItemViewModel.swift */; };
+		14A639C72B1283D400E12415 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639C62B1283D400E12415 /* OrderViewModel.swift */; };
+		14A639C92B1283F600E12415 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639C82B1283F600E12415 /* HomePageView.swift */; };
+		14A639CB2B12841B00E12415 /* CompleteRestockOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639CA2B12841B00E12415 /* CompleteRestockOrderView.swift */; };
+		14A639CD2B12843A00E12415 /* ConfirmedRestockOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */; };
+		14A639CF2B12845700E12415 /* ArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639CE2B12845700E12415 /* ArchiveListView.swift */; };
+		14A639D12B12847700E12415 /* EditOrderStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639D02B12847700E12415 /* EditOrderStatusView.swift */; };
+		14A639D32B12849300E12415 /* OrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639D22B12849300E12415 /* OrderDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +59,17 @@
 		143C97202B0EB3C3003AAEB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		143C97232B0EB3C3003AAEB5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		143C97612B0EB5A5003AAEB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14A639BE2B12831700E12415 /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		14A639C02B12833000E12415 /* InventoryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemModel.swift; sourceTree = "<group>"; };
+		14A639C22B12835F00E12415 /* NavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewModel.swift; sourceTree = "<group>"; };
+		14A639C42B12839000E12415 /* InventoryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItemViewModel.swift; sourceTree = "<group>"; };
+		14A639C62B1283D400E12415 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		14A639C82B1283F600E12415 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		14A639CA2B12841B00E12415 /* CompleteRestockOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRestockOrderView.swift; sourceTree = "<group>"; };
+		14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedRestockOrderView.swift; sourceTree = "<group>"; };
+		14A639CE2B12845700E12415 /* ArchiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveListView.swift; sourceTree = "<group>"; };
+		14A639D02B12847700E12415 /* EditOrderStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderStatusView.swift; sourceTree = "<group>"; };
+		14A639D22B12849300E12415 /* OrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +130,9 @@
 		143C971B2B0EB3C1003AAEB5 /* GiuliettaInventoryManagement */ = {
 			isa = PBXGroup;
 			children = (
+				14A639BB2B1282DD00E12415 /* Model */,
+				14A639BC2B1282E500E12415 /* ViewModel */,
+				14A639BD2B1282F700E12415 /* View */,
 				143C971C2B0EB3C1003AAEB5 /* GiuliettaInventoryManagementApp.swift */,
 				143C971E2B0EB3C1003AAEB5 /* ContentView.swift */,
 				143C97202B0EB3C3003AAEB5 /* Assets.xcassets */,
@@ -122,6 +147,38 @@
 				143C97232B0EB3C3003AAEB5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		14A639BB2B1282DD00E12415 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				14A639BE2B12831700E12415 /* OrderModel.swift */,
+				14A639C02B12833000E12415 /* InventoryItemModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		14A639BC2B1282E500E12415 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				14A639C22B12835F00E12415 /* NavigationViewModel.swift */,
+				14A639C42B12839000E12415 /* InventoryItemViewModel.swift */,
+				14A639C62B1283D400E12415 /* OrderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		14A639BD2B1282F700E12415 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				14A639C82B1283F600E12415 /* HomePageView.swift */,
+				14A639CA2B12841B00E12415 /* CompleteRestockOrderView.swift */,
+				14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */,
+				14A639CE2B12845700E12415 /* ArchiveListView.swift */,
+				14A639D02B12847700E12415 /* EditOrderStatusView.swift */,
+				14A639D22B12849300E12415 /* OrderDetailsView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +285,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				143C971F2B0EB3C1003AAEB5 /* ContentView.swift in Sources */,
+				14A639C32B12835F00E12415 /* NavigationViewModel.swift in Sources */,
+				14A639C12B12833000E12415 /* InventoryItemModel.swift in Sources */,
+				14A639CD2B12843A00E12415 /* ConfirmedRestockOrderView.swift in Sources */,
+				14A639CB2B12841B00E12415 /* CompleteRestockOrderView.swift in Sources */,
+				14A639BF2B12831700E12415 /* OrderModel.swift in Sources */,
+				14A639CF2B12845700E12415 /* ArchiveListView.swift in Sources */,
+				14A639C52B12839000E12415 /* InventoryItemViewModel.swift in Sources */,
+				14A639C72B1283D400E12415 /* OrderViewModel.swift in Sources */,
+				14A639D12B12847700E12415 /* EditOrderStatusView.swift in Sources */,
+				14A639C92B1283F600E12415 /* HomePageView.swift in Sources */,
+				14A639D32B12849300E12415 /* OrderDetailsView.swift in Sources */,
 				143C971D2B0EB3C1003AAEB5 /* GiuliettaInventoryManagementApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

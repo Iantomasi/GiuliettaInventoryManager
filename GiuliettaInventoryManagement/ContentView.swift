@@ -6,19 +6,31 @@
 //
 
 import SwiftUI
-
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @StateObject private var navigationViewModel = NavigationViewModel()
+        @State private var showArchiveListView: Bool = false
+        
+        var body: some View {
+            NavigationView {
+                ZStack {
+                    if !showArchiveListView {
+                        HomePageView(showArchiveListView: $showArchiveListView)
+                    }
 
-#Preview {
-    ContentView()
+                    if showArchiveListView {
+                        ArchiveListView(showArchiveListView: $showArchiveListView)
+                            .environment(\.layoutDirection, .rightToLeft) //making the ArchiveList fade in from the left instead of the right, what we're doing is essentially flipping our page's view
+                            .transition(.move(edge: .leading))
+                            .animation(.default) //give up on using optimized nav logic, this is super cool anyways
+                    }
+                }
+            }
+            .environmentObject(navigationViewModel)
+        }
+    }
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
 }
