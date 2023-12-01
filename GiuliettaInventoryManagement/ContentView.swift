@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
+
 struct ContentView: View {
     @StateObject private var navigationViewModel = NavigationViewModel()
         @State private var showArchiveListView: Bool = false
@@ -29,8 +32,19 @@ struct ContentView: View {
         }
     }
 
+/*
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        static func setupFirebase() {
+              if FirebaseApp.app() == nil { // Check if Firebase has already been configured
+                  FirebaseApp.configure()
+              }
+          }
+        static var previews: some View {
+            setupFirebase()
+            return ContentView()
+                .environmentObject(InventoryItemViewModel())
+                .environmentObject(OrderViewModel())
+        }
     }
-}
+ */
+

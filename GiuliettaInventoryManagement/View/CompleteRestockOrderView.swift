@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestore
 
 struct CompleteRestockOrderView: View {
     @State private var comments: String = ""
     @State private var email: String = ""
     @State private var isDropdownVisible: Bool = false
+    @State private var shouldNavigate = false
+
     
     
     @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel
@@ -32,11 +36,31 @@ struct CompleteRestockOrderView: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: ConfirmedRestockOrderView()) {
-                    Image(systemName: "paperplane.circle.fill")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                }
+                Button(action: {
+                    print("hello you in paper airplane button")
+                    // Call the placeOrder method when the button is tapped
+                    orderViewModel.placeOrder(with: inventoryItemViewModel.selectedItems, comments: comments, email: email) { result in
+                        switch result {
+                        case .success():
+                            // Handle success, like showing a confirmation message and navigating to the next view
+                            print("Order placed successfully")
+                            self.shouldNavigate = true
+                        case .failure(let error):
+                            // Handle failure, like showing an error message to the user
+                            print("Error placing order: \(error.localizedDescription)")
+                        }
+                    }
+                }) {
+                               Image(systemName: "paperplane.circle.fill")
+                                   .resizable()
+                                   .frame(width: 30, height: 30)
+                           }
+
+                           // Hidden navigation link activated by the button
+                           NavigationLink(destination: ConfirmedRestockOrderView(), isActive: $shouldNavigate) {
+                               EmptyView()
+                           }
+                           .hidden()
             }
             
             Text("Requested Items")
@@ -102,9 +126,20 @@ struct CompleteRestockOrderView: View {
         .padding()
     }
 }
-
-struct CompleteRestockOrderView_Previews: PreviewProvider {
-    static var previews: some View {
-        CompleteRestockOrderView()
-    }
-}
+/*
+ struct CompleteRestockOrderView_Previews: PreviewProvider {
+ static func setupFirebase() {
+ if FirebaseApp.app() == nil { // Check if Firebase has already been configured
+ FirebaseApp.configure()
+ }
+ }
+ 
+ static var previews: some View {
+ setupFirebase()
+ return CompleteRestockOrderView()
+ .environmentObject(InventoryItemViewModel())
+ .environmentObject(OrderViewModel())
+ }
+ 
+ }
+ */

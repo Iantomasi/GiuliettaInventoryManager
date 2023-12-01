@@ -47,11 +47,12 @@ struct OrderDetailsView: View {
     }
 }
 
- 
+ /*
  struct OrderDetailsView_Previews: PreviewProvider {
      static var previews: some View {
  OrderDetailsView(restockOrderId: .constant("restockOrderId"))
      }
  }
+  */
  
  

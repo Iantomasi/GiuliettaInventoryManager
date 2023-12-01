@@ -15,8 +15,8 @@ struct HomePageView: View {
     @State private var isBarExpanded: Bool = false
     @State private var isKitchenExpanded: Bool = false
     @EnvironmentObject var navigationViewModel: NavigationViewModel
-    @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel // Assume you have this ViewModel in your Environment
-
+    @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel
+    @EnvironmentObject var orderViewModel: OrderViewModel
     
     
     
@@ -74,9 +74,9 @@ struct HomePageView: View {
 
                  ScrollView {
                      VStack {
-                         CustomDisclosureGroup(isExpanded: $isFloorExpanded, title: "Floor", items: floorItems)
-                                                 CustomDisclosureGroup(isExpanded: $isBarExpanded, title: "Bar", items: barItems)
-                                                 CustomDisclosureGroup(isExpanded: $isKitchenExpanded, title: "Kitchen", items: kitchenItems)
+                         CustomDisclosureGroup(isExpanded: $isFloorExpanded, title: "Floor", items: floorItems, inventoryItemViewModel: inventoryItemViewModel)
+                         CustomDisclosureGroup(isExpanded: $isBarExpanded, title: "Bar", items: barItems, inventoryItemViewModel: inventoryItemViewModel)
+                         CustomDisclosureGroup(isExpanded: $isKitchenExpanded, title: "Kitchen", items: kitchenItems, inventoryItemViewModel: inventoryItemViewModel)
                                              }
                                          }
                                          Spacer()
@@ -109,6 +109,7 @@ struct CustomDisclosureGroup: View {
     @Binding var isExpanded: Bool
     let title: String
     let items: [InventoryItemModel]
+    var inventoryItemViewModel: InventoryItemViewModel // Add this line
 
     var body: some View {
         DisclosureGroup(
@@ -117,28 +118,30 @@ struct CustomDisclosureGroup: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
                         ForEach(items) { item in
-                            InventoryItemView(item: item)
+                            InventoryItemView(item: item, inventoryItemViewModel: inventoryItemViewModel) // Modify this line
                         }
                     }
                 }
                 .frame(maxHeight: 200) // Set a maximum height for the scrollable content
             },
             label: {
-                            Text(title)
-                                .foregroundColor(.white)
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading) // Ensure full width
-                        }
-                    )
-                    .padding(.horizontal, 0) // Match padding with the content
-                    .accentColor(.white)
-                    .background(Color.black.opacity(0.6))
-                    .cornerRadius(10)
-                }
+                Text(title)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading) // Ensure full width
             }
+        )
+        .padding(.horizontal, 0) // Match padding with the content
+        .accentColor(.white)
+        .background(Color.black.opacity(0.6))
+        .cornerRadius(10)
+    }
+}
 
 struct InventoryItemView: View {
     let item: InventoryItemModel
+    var inventoryItemViewModel: InventoryItemViewModel // Add this line
+
 
     var body: some View {
         HStack {
@@ -163,7 +166,7 @@ struct InventoryItemView: View {
     }
 }
 
-
+/*
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
             HomePageView(showArchiveListView: .constant(false))
@@ -171,4 +174,5 @@ struct HomePageView_Previews: PreviewProvider {
                 .environmentObject(InventoryItemViewModel())
         }
     }
+ */
 

@@ -66,8 +66,10 @@ struct EditOrderStatusView: View {
     }
 }
 
-struct EditOrderStatusView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditOrderStatusView(restockOrderId: .constant("restockOrderId"))
-    }
-}
+/*
+ struct EditOrderStatusView_Previews: PreviewProvider {
+ static var previews: some View {
+ EditOrderStatusView(restockOrderId: .constant("restockOrderId"))
+ }
+ }
+ */

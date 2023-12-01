@@ -108,13 +108,14 @@ struct ArchiveListView: View {
         }
     }
 }
-
-struct ArchiveListView_Previews: PreviewProvider {
-    @State static private var dummyShowArchiveListView = true
-
-    static var previews: some View {
-        NavigationView {
-            ArchiveListView(showArchiveListView: $dummyShowArchiveListView)
-        }
-    }
-}
+/*
+ struct ArchiveListView_Previews: PreviewProvider {
+ @State static private var dummyShowArchiveListView = true
+ 
+ static var previews: some View {
+ NavigationView {
+ ArchiveListView(showArchiveListView: $dummyShowArchiveListView)
+ }
+ }
+ }
+ */
