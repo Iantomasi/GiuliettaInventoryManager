@@ -8,31 +8,25 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
-
 class OrderViewModel: ObservableObject {
     
     private let db = Firestore.firestore()
-
+    
     @Published var orders: [OrderModel] = []
-
+    
     func placeOrder(with items: [InventoryItemModel], comments: String, email: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let order = OrderModel(id: UUID().uuidString, // This will generate a new UUID string
+        let order = OrderModel(id: UUID().uuidString,
                                itemNames: items.map { $0.name },
                                status: .enroute,
-                               date: Date())
+                               date: Date(),
+                               comments: comments,
+                               email: email)
         
-        // Convert order to dictionary for Firestore
-        let orderData: [String: Any] = [
-            "id": order.id,
-            "itemNames": order.itemNames,
-            "status": order.status.rawValue,
-            "date": Timestamp(date: order.date),
-            "comments": comments,
-            "email": email
-        ]
+        // Convert the order to a dictionary for Firestore
+        let orderData = order.toDictionary()
         
         // Add order to Firestore
-        Firestore.firestore().collection("orders").document(order.id).setData(orderData) { error in
+        db.collection("orders").document(order.id).setData(orderData) { error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -40,6 +34,24 @@ class OrderViewModel: ObservableObject {
             }
         }
     }
-}
-
     
+    func fetchOrders() {
+        db.collection("orders").addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                print("Error fetching orders: \(error.localizedDescription)")
+                return
+            }
+            
+            self.orders = querySnapshot?.documents.compactMap { document in
+                let orderData = document.data()
+                let order = OrderModel(id: document.documentID,
+                                       itemNames: orderData["itemNames"] as? [String] ?? [],
+                                       status: DeliveryStatus(rawValue: orderData["status"] as? String ?? "") ?? .enroute,
+                                       date: (orderData["timestamp"] as? Timestamp)?.dateValue() ?? Date(),
+                                       comments: orderData["comments"] as? String ?? "",
+                                       email: orderData["email"] as? String ?? "")
+                return order
+            } ?? []
+        }
+    }
+}
