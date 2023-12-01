@@ -14,6 +14,8 @@ enum OrderStatus: String {
 struct ConfirmedRestockOrderView: View {
 
     @EnvironmentObject var navigationViewModel: NavigationViewModel
+    @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel
+
         
     @State private var currentStatus: OrderStatus = .SHIPPED
         
@@ -52,6 +54,10 @@ struct ConfirmedRestockOrderView: View {
                 
             }
             .padding()
-            .navigationBarBackButtonHidden(true) // Hide the back button because we aren't modifying anything after an email is sent
+            .navigationBarBackButtonHidden(true)
+            .onDisappear {
+                       // Clear the selected items when this view disappears
+                       inventoryItemViewModel.selectedItems.removeAll()
+                   }
         }
     }
