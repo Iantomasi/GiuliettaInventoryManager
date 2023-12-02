@@ -49,7 +49,6 @@
 		14A639CD2B12843A00E12415 /* ConfirmedRestockOrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */; };
 		14A639CF2B12845700E12415 /* ArchiveListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639CE2B12845700E12415 /* ArchiveListView.swift */; };
 		14A639D12B12847700E12415 /* EditOrderStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639D02B12847700E12415 /* EditOrderStatusView.swift */; };
-		14A639D32B12849300E12415 /* OrderDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A639D22B12849300E12415 /* OrderDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 		14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedRestockOrderView.swift; sourceTree = "<group>"; };
 		14A639CE2B12845700E12415 /* ArchiveListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveListView.swift; sourceTree = "<group>"; };
 		14A639D02B12847700E12415 /* EditOrderStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOrderStatusView.swift; sourceTree = "<group>"; };
-		14A639D22B12849300E12415 /* OrderDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +174,6 @@
 				14A639CC2B12843A00E12415 /* ConfirmedRestockOrderView.swift */,
 				14A639CE2B12845700E12415 /* ArchiveListView.swift */,
 				14A639D02B12847700E12415 /* EditOrderStatusView.swift */,
-				14A639D22B12849300E12415 /* OrderDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -295,7 +292,6 @@
 				14A639C72B1283D400E12415 /* OrderViewModel.swift in Sources */,
 				14A639D12B12847700E12415 /* EditOrderStatusView.swift in Sources */,
 				14A639C92B1283F600E12415 /* HomePageView.swift in Sources */,
-				14A639D32B12849300E12415 /* OrderDetailsView.swift in Sources */,
 				143C971D2B0EB3C1003AAEB5 /* GiuliettaInventoryManagementApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
