@@ -6,70 +6,72 @@
 //
 
 import SwiftUI
+
 enum Status: String {
     case enRoute = "EN ROUTE"
     case delivered = "DELIVERED"
 }
 
 struct EditOrderStatusView: View {
-    @Binding var restockOrderId: String
-    @State private var orderStatus: Status = .enRoute // Default status which should be EN ROUTE
+    var restockOrderId: String // This is now a regular String
+    @EnvironmentObject var orderViewModel: OrderViewModel
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            HStack {
-                Spacer()
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss() //Close button functionality (dismisses the view)
-                }) {
-                    Text("Close")
-                        .font(.system(size: 20))
-                        .foregroundColor(.blue)
-                }
-                .padding(.trailing)
-            }
-
-            TextField("Restock Order ID", text: $restockOrderId)
-                .padding()
-                .background(Color.gray.opacity(0.2))
-                .cornerRadius(10)
-                .padding(.bottom, 20)
-
-            //This will of course be the items we passed into the order originally, the same list in the CompleteRestockOrderView. I worry this will be fairly complex but maybe we are overthinking it
-            ForEach(0..<5) { _ in
-                HStack {
-                    Text("item")
-                        .padding(.trailing, 8)
-                    Spacer()
-                }
-            }
-            Spacer(minLength: 20)
-
-            HStack {
-                Spacer()
-                Button(action: {
-                    self.orderStatus = .delivered    //set the default status from EN ROUTE to Delivered, which will in turn push the data under the DELIVERED table in the ArchiveListView
-                }) {
-                    Text("DELIVERED")
-                        .font(.headline)
-                        .foregroundColor(.white)
+            if let order = orderViewModel.currentOrder {
+                VStack {
+                    Text("Restock Order ID: \(order.id)")
                         .padding()
-                        .background(Color.green)
+                        .background(Color.gray.opacity(0.2))
                         .cornerRadius(10)
+                        .padding(.bottom, 20)
+
+                    // Display the items and other properties of the order
+                    ForEach(order.itemNames, id: \.self) { itemName in
+                        Text(itemName)
+                            .padding(.trailing, 8)
+                    }
+
+                    Text("Status: \(order.status.rawValue)")
+                    Text("Date: \(order.date.formatted())")
+                    Text("Comments: \(order.comments)")
+                    Text("Email: \(order.email)")
+
+                    Spacer(minLength: 20)
+
+                    // Only show the "DELIVERED" button if the status is not already delivered
+                    if order.status != .delivered {
+                        Button(action: {
+                            orderViewModel.updateOrderStatus(orderId: order.id, newStatus: .delivered) { result in
+                                switch result {
+                                case .success():
+                                    print("Order status updated to delivered.")
+                                    presentationMode.wrappedValue.dismiss()
+                                case .failure(let error):
+                                    print("Error updating order status: \(error.localizedDescription)")
+                                }
+                            }
+                        }) {
+                            Text("DELIVERED")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.green)
+                                .cornerRadius(10)
+                        }
+                        .padding()
+                    }
                 }
-                Spacer()
+            } else {
+                Text("Loading order details...")
+                    .padding()
             }
-            .padding()
         }
         .padding()
+        .onAppear {
+            // Fetch the details for the current order
+            orderViewModel.fetchOrderDetails(orderId: restockOrderId)
+        }
     }
 }
-
-/*
- struct EditOrderStatusView_Previews: PreviewProvider {
- static var previews: some View {
- EditOrderStatusView(restockOrderId: .constant("restockOrderId"))
- }
- }
- */
