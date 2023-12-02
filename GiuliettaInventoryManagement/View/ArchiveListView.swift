@@ -52,47 +52,60 @@ struct ArchiveListView: View {
     
     func orderRow(for order: OrderModel) -> some View {
         HStack {
-            Button("del", action: {
-                // implement delete functionality here
-            })
-            .padding()
-            .frame(maxWidth: .infinity) // This will allow the button to expand
-            .background(Color.red)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            Button(action: {
+                // This button's action should only be called when this button is tapped
+                orderViewModel.deleteOrder(orderId: order.id) { result in
+                    switch result {
+                    case .success():
+                        print("Successfully deleted order.")
+                    case .failure(let error):
+                        print("Error deleting order: \(error.localizedDescription)")
+                    }
+                }
+            }) {
+                HStack {
+                    Image(systemName: "trash")
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Color.red)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+            }
+            .buttonStyle(PlainButtonStyle()) // Prevent List from hijacking touch events
             
             Button(action: {
-                self.selectedOrderId = order.id // Set the selectedOrderId when "edit" is tapped
+                // This button's action should only be called when this button is tapped
+                self.selectedOrderId = order.id
             }) {
-                Text("edit")
-                    .padding()
-                    .frame(maxWidth: .infinity) // This will allow the button to expand
+                HStack {
+                    Image(systemName: "pencil")
+                }
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(order.status == .delivered ? Color.gray : Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(10)
             }
-            .background(order.status == .delivered ? Color.gray : Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            .buttonStyle(PlainButtonStyle()) // Prevent List from hijacking touch events
             
             Text(order.id.prefix(3))
                 .padding()
-                .frame(maxWidth: .infinity, alignment: .trailing) // This will allow the text to expand
+                .frame(maxWidth: .infinity, alignment: .trailing)
                 .background(Color.gray.opacity(0.2))
                 .cornerRadius(10)
             
-            NavigationLink("", destination: EditOrderStatusView(restockOrderId: order.id), isActive: Binding(
+            NavigationLink(destination: EditOrderStatusView(restockOrderId: order.id), isActive: Binding(
                 get: { self.selectedOrderId == order.id },
                 set: { isActive in
                     if !isActive {
                         self.selectedOrderId = nil
                     }
                 }
-            )).hidden()
+            )) {
+                EmptyView()
+            }
+            .hidden()
         }
-    }
-}
-
-struct ArchiveListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArchiveListView(showArchiveListView: .constant(true))
-            .environmentObject(OrderViewModel())
     }
 }

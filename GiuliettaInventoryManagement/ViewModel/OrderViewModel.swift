@@ -101,4 +101,17 @@ class OrderViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteOrder(orderId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        db.collection("orders").document(orderId).delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+                DispatchQueue.main.async {
+                    self.orders.removeAll { $0.id == orderId }
+                }
+            }
+        }
+    }
 }
