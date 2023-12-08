@@ -10,15 +10,14 @@ class InventoryItemViewModel: ObservableObject {
 
     @Published var selectedItems: [InventoryItemModel] = []
 
-    
-    // This function will be used to add the items to an order in CompleteRestockOrderView
+    // this function adds our hard-coded items to the OrderModel in the CompleteRestockOrderView
     func addItemToOrder(item: InventoryItemModel) {
           if !selectedItems.contains(where: { $0.id == item.id }) {
               selectedItems.append(item)
           }
       }
 
-    // This function will be used to remove the items from an order in ConfirmedRestockOrderView
+    // this functionm removes accidentally clicked items from the OrderModel in the CompleteRestockOrderView
     func removeItemFromOrder(item: InventoryItemModel) {
          selectedItems.removeAll { $0.id == item.id }
      }

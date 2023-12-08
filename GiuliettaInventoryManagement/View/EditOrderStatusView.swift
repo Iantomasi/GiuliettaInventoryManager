@@ -13,7 +13,7 @@ enum Status: String {
 }
 
 struct EditOrderStatusView: View {
-    var restockOrderId: String // This is now a regular String
+    var restockOrderId: String // string holding the id of the selected order
     @EnvironmentObject var orderViewModel: OrderViewModel
     @Environment(\.presentationMode) var presentationMode
 
@@ -27,7 +27,7 @@ struct EditOrderStatusView: View {
                         .cornerRadius(10)
                         .padding(.bottom, 20)
 
-                    // Display the items and other properties of the order
+                    // display the itemNames, status, date, comments and email of the order
                     ForEach(order.itemNames, id: \.self) { itemName in
                         Text(itemName)
                             .padding(.trailing, 8)
@@ -43,6 +43,7 @@ struct EditOrderStatusView: View {
                     // Only show the "DELIVERED" button if the status is not already delivered
                     if order.status != .delivered {
                         Button(action: {
+                            // calling the updateOrderStatus function in the OrderViewModel
                             orderViewModel.updateOrderStatus(orderId: order.id, newStatus: .delivered) { result in
                                 switch result {
                                 case .success():
@@ -70,7 +71,7 @@ struct EditOrderStatusView: View {
         }
         .padding()
         .onAppear {
-            // Fetch the details for the current order
+            // fetch the details for the current order
             orderViewModel.fetchOrderDetails(orderId: restockOrderId)
         }
     }

@@ -10,19 +10,21 @@ import Firebase
 import FirebaseFirestore
 
 struct CompleteRestockOrderView: View {
+    
+    // state variables being used to store user input and view control
     @State private var comments: String = ""
     @State private var email: String = ""
     @State private var isDropdownVisible: Bool = false
     @State private var shouldNavigate = false
 
     
-    
+    // environment objects declared to access shared data and logic
     @EnvironmentObject var inventoryItemViewModel: InventoryItemViewModel
     @EnvironmentObject var orderViewModel: OrderViewModel
 
 
-    //these will be hard-coded emails of the restaurant owners
-    let emailContacts: [String] = ["contact1@example.com", "contact2@example.com", "contact3@example.com"]
+    // hard-coded emails of the restaurant owners
+    let emailContacts: [String] = ["ericgiulietta@gmail.com", "coreygiulietta@icloud.com"]
     var filteredContacts: [String] {
           return emailContacts
       }
@@ -37,16 +39,13 @@ struct CompleteRestockOrderView: View {
                 Spacer()
                 
                 Button(action: {
-                    print("hello you in paper airplane button")
-                    // Call the placeOrder method when the button is tapped
+                    // call the placeOrder method when button is tapped
                     orderViewModel.placeOrder(with: inventoryItemViewModel.selectedItems, comments: comments, email: email) { result in
                         switch result {
                         case .success():
-                            // Handle success, like showing a confirmation message and navigating to the next view
                             print("Order placed successfully")
                             self.shouldNavigate = true
                         case .failure(let error):
-                            // Handle failure, like showing an error message to the user
                             print("Error placing order: \(error.localizedDescription)")
                         }
                     }
@@ -56,7 +55,7 @@ struct CompleteRestockOrderView: View {
                                    .frame(width: 30, height: 30)
                            }
 
-                           // Hidden navigation link activated by the button
+                           // hidden navigation link activated by the button
                            NavigationLink(destination: ConfirmedRestockOrderView(), isActive: $shouldNavigate) {
                                EmptyView()
                            }
@@ -67,13 +66,14 @@ struct CompleteRestockOrderView: View {
                 .font(.subheadline).bold()
                 .padding(.top)
             
-            //these will be the items that we clicked + button on in the past view
+            // these will be the items that we clicked + button on in the past view
             ForEach(inventoryItemViewModel.selectedItems) { item in
                    HStack {
                        Text(item.name)
                            .padding(.trailing, 8)
                        Spacer()
                        Button(action: {
+                           // calling removeItemFromOrder method in InventoryItemViewModel when - button is tapped
                            inventoryItemViewModel.removeItemFromOrder(item: item)
                        }) {
                            Image(systemName: "minus.circle.fill")
@@ -82,16 +82,16 @@ struct CompleteRestockOrderView: View {
                    }
                }
             
-            //Simple additional comments field
+            // simple additional comments text box
             TextField("Comments", text: $comments)
                 .padding()
                 .overlay(RoundedRectangle(cornerRadius: 5).stroke(Color.gray, lineWidth: 1))
                 .padding(.top)
             
-            //This is where I'm hoping the to implement the email API logic
+            
             TextField("Send to", text: $email, onEditingChanged: { isEditing in
                 self.isDropdownVisible = isEditing
-                }) //when swift sees we are editing the Send to box, it makes the hard-coded emails list drop down
+                }) // when swift sees we are editing the Send to box, it makes the hard-coded emails list drop down
             .padding()
             .overlay(RoundedRectangle(cornerRadius:5).stroke(Color.gray, lineWidth: 1))
             .padding(.top)
@@ -126,20 +126,3 @@ struct CompleteRestockOrderView: View {
         .padding()
     }
 }
-/*
- struct CompleteRestockOrderView_Previews: PreviewProvider {
- static func setupFirebase() {
- if FirebaseApp.app() == nil { // Check if Firebase has already been configured
- FirebaseApp.configure()
- }
- }
- 
- static var previews: some View {
- setupFirebase()
- return CompleteRestockOrderView()
- .environmentObject(InventoryItemViewModel())
- .environmentObject(OrderViewModel())
- }
- 
- }
- */

@@ -18,13 +18,13 @@ struct GiuliettaInventoryManagementApp: App {
       @StateObject var orderViewModel = OrderViewModel()
       
       init() {
-          FirebaseApp.configure()
+          FirebaseApp.configure() // configure Firebase when app is started
       }
 
       var body: some Scene {
           WindowGroup {
               ContentView()
-                  // Inject your view models into the environment
+                  // injecting our views into our environment
                   .environmentObject(navigationViewModel)
                   .environmentObject(inventoryItemViewModel)
                   .environmentObject(orderViewModel)

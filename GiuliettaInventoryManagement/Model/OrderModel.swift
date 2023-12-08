@@ -6,13 +6,15 @@
 //
 
 import Foundation
-import FirebaseFirestore // Import Firestore
+import FirebaseFirestore
 
+// enum for tracking delivery status, conforming to String and Codable for easy encoding/decoding
 enum DeliveryStatus: String, Codable {
     case enroute = "EN ROUTE"
     case delivered = "DELIVERED"
 }
 
+// defining our order structure, conforming to Identifiable(use in Swift UI) and Codable (serialization)
 struct OrderModel: Identifiable, Codable {
     var id: String
     var itemNames: [String]
@@ -21,9 +23,8 @@ struct OrderModel: Identifiable, Codable {
     var comments: String
     var email: String
 
-    // No CodingKeys or init(from:) needed if you're not using Firestore's Codable support
 
-    // Converts the `OrderModel` to a dictionary suitable for Firestore.
+    // this is the method that's responsible for formatting our OrderModel data to conform to our Firestore document data
     func toDictionary() -> [String: Any] {
         return [
             "id": id,

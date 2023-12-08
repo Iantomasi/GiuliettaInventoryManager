@@ -16,10 +16,12 @@ struct ContentView: View {
         var body: some View {
             NavigationView {
                 ZStack {
+                    // show the HomePageView when the ArchiveListView is not being shown
                     if !showArchiveListView {
                         HomePageView(showArchiveListView: $showArchiveListView)
                     }
 
+                    // show ArchiveListView when needed
                     if showArchiveListView {
                         ArchiveListView(showArchiveListView: $showArchiveListView)
                             .environment(\.layoutDirection, .rightToLeft) //making the ArchiveList fade in from the left instead of the right, what we're doing is essentially flipping our page's view
@@ -28,23 +30,7 @@ struct ContentView: View {
                     }
                 }
             }
-            .environmentObject(navigationViewModel)
+            .environmentObject(navigationViewModel) // provide the navigation view model to the views
         }
     }
-
-/*
-struct ContentView_Previews: PreviewProvider {
-        static func setupFirebase() {
-              if FirebaseApp.app() == nil { // Check if Firebase has already been configured
-                  FirebaseApp.configure()
-              }
-          }
-        static var previews: some View {
-            setupFirebase()
-            return ContentView()
-                .environmentObject(InventoryItemViewModel())
-                .environmentObject(OrderViewModel())
-        }
-    }
- */
 

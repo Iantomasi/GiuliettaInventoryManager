@@ -9,7 +9,9 @@ import Foundation
 
 class NavigationViewModel: ObservableObject {
     
-    @Published var navigateToHome: Bool = false
-
+    // booleans that are responsible for navigating back to HomePageView (surprisingly complicated for such a 'simple and intuitive' prorgamming language)
+    
+    @Published var shouldNavigateToCompleteOrderView: Bool = false
+    
     @Published var shouldPopToRootView: Bool = false
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomePageView: View {
     
-    //booleans to use in views logic
+    // state & environment variables we use to control the view's behavior and data
     @Binding var showArchiveListView: Bool
     @State private var isFloorExpanded: Bool = false
     @State private var isBarExpanded: Bool = false
@@ -19,7 +19,7 @@ struct HomePageView: View {
     @EnvironmentObject var orderViewModel: OrderViewModel
     
     
-    
+    // hard coded item arrays that we iterate over in our disclosure groups
     let floorItems = [
     InventoryItemModel(name: "Table setups", imageName: "table_setup"),
     InventoryItemModel(name: "Cleaning supplies", imageName: "cleaning_supplies"),
@@ -64,7 +64,7 @@ struct HomePageView: View {
                  .resizable()
                  .scaledToFit()
                  .frame(height: 400)
-                 .padding(.top, 250) // Adjust to ensure the image is positioned correctly
+                 .padding(.top, 250)
              
              VStack(alignment: .center, spacing: 10) {
                  Text("Giulietta Pizzeria Inventory")
@@ -72,15 +72,18 @@ struct HomePageView: View {
                      .foregroundColor(.black)
                      .multilineTextAlignment(.center)
 
+                 // make our DisclosureGroups collapsible and scrollable
                  ScrollView {
                      VStack {
                          CustomDisclosureGroup(isExpanded: $isFloorExpanded, title: "Floor", items: floorItems, inventoryItemViewModel: inventoryItemViewModel)
                          CustomDisclosureGroup(isExpanded: $isBarExpanded, title: "Bar", items: barItems, inventoryItemViewModel: inventoryItemViewModel)
                          CustomDisclosureGroup(isExpanded: $isKitchenExpanded, title: "Kitchen", items: kitchenItems, inventoryItemViewModel: inventoryItemViewModel)
-                                             }
-                                         }
-                                         Spacer()
-                HStack {
+                    }
+                }
+                Spacer()
+                
+                 // Orders button that triggers our showArchiveListView animation/view
+                 HStack {
                     Button(action: {
                         showArchiveListView.toggle()
                     }) {
@@ -88,8 +91,9 @@ struct HomePageView: View {
                     }
                     
                     Spacer()
-                    NavigationLink(destination: CompleteRestockOrderView(), isActive: $navigationViewModel.navigateToHome) {
-                        Text("Next") //Bringing us to the CompleteRestockOrderView which I'm hoping to link to the Email API with some help (could possible use a built-in iOS functionality accoording to a classmate?)
+                     
+                    NavigationLink(destination: CompleteRestockOrderView(), isActive: $navigationViewModel.shouldNavigateToCompleteOrderView) {
+                        Text("Next") // bringing us to the CompleteRestockOrderView (which is where I originally hoped to link to the email api)
                     }
                 }
             }
@@ -99,17 +103,18 @@ struct HomePageView: View {
             .onReceive(navigationViewModel.$shouldPopToRootView) { shouldPop in
                 if shouldPop {
                     navigationViewModel.shouldPopToRootView = false
-                    
                 } //this logic I found on the internet, essentially what renders switching back to the HomePageView from the ConfirmedReStockOrderView
             }
         }
     }
 }
+
+// handling the logic & styling of floor bar and kitchen disclosure groups themselves
 struct CustomDisclosureGroup: View {
     @Binding var isExpanded: Bool
     let title: String
     let items: [InventoryItemModel]
-    var inventoryItemViewModel: InventoryItemViewModel // Add this line
+    var inventoryItemViewModel: InventoryItemViewModel
 
     var body: some View {
         DisclosureGroup(
@@ -117,30 +122,32 @@ struct CustomDisclosureGroup: View {
             content: {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 0) {
+                        // for each loop that populates the disclosure group with the custom InventoryItemView (essentially the rows of items in the disclosure groups)
                         ForEach(items) { item in
-                            InventoryItemView(item: item, inventoryItemViewModel: inventoryItemViewModel) // Modify this line
+                            InventoryItemView(item: item, inventoryItemViewModel: inventoryItemViewModel)
                         }
                     }
                 }
-                .frame(maxHeight: 200) // Set a maximum height for the scrollable content
+                .frame(maxHeight: 200)
             },
             label: {
                 Text(title)
                     .foregroundColor(.white)
                     .padding()
-                    .frame(maxWidth: .infinity, alignment: .leading) // Ensure full width
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         )
-        .padding(.horizontal, 0) // Match padding with the content
+        .padding(.horizontal, 0)
         .accentColor(.white)
         .background(Color.black.opacity(0.6))
         .cornerRadius(10)
     }
 }
 
+// handling the inventory item view logic and styling (rows of items in the disclosure groups)
 struct InventoryItemView: View {
     let item: InventoryItemModel
-    var inventoryItemViewModel: InventoryItemViewModel // Add this line
+    var inventoryItemViewModel: InventoryItemViewModel
 
 
     var body: some View {
@@ -150,8 +157,9 @@ struct InventoryItemView: View {
                 .scaledToFit()
                 .frame(width: 50, height: 50)
             Text(item.name)
-                .foregroundColor(.white) // Make the text white
+                .foregroundColor(.white)
             Spacer()
+            // calling the addItemToOrder function in the InventoryItemViewModel to persist the data onto the CompleteRestockOrderVIew
             Button(action: {
                 inventoryItemViewModel.addItemToOrder(item: item)
             }) {
@@ -165,16 +173,3 @@ struct InventoryItemView: View {
 
     }
 }
-
-/*
-struct HomePageView_Previews: PreviewProvider {
-    static var previews: some View {
-            HomePageView(showArchiveListView: .constant(false))
-                .environmentObject(NavigationViewModel())
-                .environmentObject(InventoryItemViewModel())
-        }
-    }
- */
-
-//removed file commit
-
