@@ -24,7 +24,7 @@ struct CompleteRestockOrderView: View {
 
 
     // hard-coded emails of the restaurant owners
-    let emailContacts: [String] = ["ericgiulietta@gmail.com", "coreygiulietta@icloud.com"]
+    let emailContacts: [String] = ["ericgiulietta@gmail.com", "coreygiulietta@icloud.com", "candygiulietta@gmail.com"]
     var filteredContacts: [String] {
           return emailContacts
       }
