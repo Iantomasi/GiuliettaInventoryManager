@@ -3,9 +3,9 @@ iOS Final project with Firebase implemented
 
 ## Link to Demo
 
-Condensed demo video (edited and increased playback speed): https://drive.google.com/file/d/1hjK1t7fegbNpdhVDBr9Yc6OTznUZMcBZ/view?usp=sharing
+Condensed demo video - 3:17 (edited and increased playback speed): https://drive.google.com/file/d/1hjK1t7fegbNpdhVDBr9Yc6OTznUZMcBZ/view?usp=sharing
 
-Original demo video (if wish to reference): https://drive.google.com/file/d/1midGsIk_lmarCsfiTor3VlTG8pw-QPen/view?usp=sharing
+Original demo video - 4:55  (if wish to reference): https://drive.google.com/file/d/1midGsIk_lmarCsfiTor3VlTG8pw-QPen/view?usp=sharing
 
 ## Icon
 
@@ -38,7 +38,7 @@ Edit Order Status View (DELIVERED status)
 
 <img src="https://github.com/Iantomasi/GiuliettaInventoryManager/assets/77695020/385a1c48-5d1a-4a18-ad5c-7dcb9eae767f" width="300">
 
-## Persistance
+## Persistence
 
 <img src="https://github.com/Iantomasi/GiuliettaInventoryManager/assets/77695020/a3ca2bc3-f54b-460c-80f2-dc300ca1c285" width="750">
 
